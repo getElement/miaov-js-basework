@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡里套选项卡</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+#wrap{width:850px;height: 345px;border:1px solid #c6c6c6; padding-left: 5px; padding-right: 6px;padding-top: 8px;padding-bottom: 4px;background: #e7e7e7;margin:50px auto;}
+#side{width:148px;height:330px;background:#e7e7e7;float:left;border:1px solid #c6c6c6;border-bottom: none;border-right:none;}
+#side img{margin-left: 56px;margin-top: 8px;}
+#side p{margin-left: 44px;}
+#activity{height:81px;}
+.left{width:148px;height:82px;border-bottom:1px solid #c6c6c6;cursor: pointer;}
+#main{width:700px;height:330px;float:left;border:1px solid #c6c6c6;border-left: none;}
+#main div{position: relative;}
+#main img{display: block;width:700px;height:330px;}
+#main ul{position: absolute;top:300px;left:0;}
+#main li{opacity: 0.8; cursor: pointer;}
+#hot_ctent{width:700px;height:330px;}
+#hot_ctent li{height:30px;background:#5a5a52;width:232px;float:left;font-size: 12px;text-align: center;border-right:1px solid #fff;color:#fff;line-height:30px;}
+#cheap_ctent{width:700px;height:330px;}
+#cheap_ctent li{height:30px;background:#5a5a52;width:174px;float:left;font-size: 12px;text-align: center;border-right:1px solid #fff;color:#fff;line-height:30px;}
+#recommend_ctent{width:700px;height:330px;}
+#recommend_ctent li{height:30px;background:#5a5a52;width:139px;float:left;font-size: 12px;text-align: center;border-right:1px solid #fff;color:#fff;line-height:30px;}
+#activity_ctent{width:700px;height:330px;}
+#activity_ctent li{height:30px;background:#5a5a52;width:174px;float:left;font-size: 12px;text-align: center;border-right:1px solid #fff;color:#fff;line-height:30px;}
+.hide{display: none;}
+.hover{background:#ef3163;}
+</style>
+<script type="text/javascript">
+/*
+	1.选项卡里面能自动切换
+	2.选项卡外面能够自动切换
+	3.点击相应的左边显示相应的的右边图片
+	4.右边鼠标划过显示一个状态
+
+
+*/	
+window.onload = function(){
+	var oSide = document.getElementById('side');
+	var oDiv = oSide.getElementsByTagName('div');
+	var oMain = document.getElementById('main');
+	var aDiv = oMain.getElementsByTagName('div');
+
+
+	var arrside1 = ["img/5.4_side1.png","img/5.4_side2.png","img/5.4_side3.png","img/5.4_side4.png"];
+	var arrside2 = ["img/5.4_side21.png","img/5.4_side22.png","img/5.4_side23.png","img/5.4_side24.png"];
+	var arr0 = ["img/5.4_right11.png","img/5.4_right12.png","img/5.4_right13.png"];
+	var arr1 = ["img/5.4_right21.png","img/5.4_right22.png","img/5.4_right23.png","img/5.4_right24.png"];
+	var arr2 = ["img/5.4_right31.png","img/5.4_right32.png","img/5.4_right33.png","img/5.4_right34.png","img/5.4_right35.png"];
+	var arr3= ["img/5.4_right41.png","img/5.4_right42.png","img/5.4_right43.png","img/5.4_right44.png"];
+ 	var arr = [arr0,arr1,arr2,arr3];
+	var num = 0;
+
+
+	//初始化
+	function fn1(){
+		oDiv[0].getElementsByTagName('img')[0].src = arrside2[this.index];
+		oDiv[0].style.background = '#fff';
+		tab(0);
+	}
+	fn1();
+
+	//side选项卡
+	for(var i=0;i<oDiv.length;i++){
+		oDiv[i].index = i;
+		oDiv[i].onmouseover = function(){
+			for(var i=0;i<oDiv.length;i++){
+				oDiv[i].getElementsByTagName('img')[0].src = arrside1[i];
+				oDiv[i].style.background = '#e7e7e7';
+			}
+			this.getElementsByTagName('img')[0].src = arrside2[this.index];
+			this.style.background = '#fff';
+			var index = this.index;
+			tab(index);
+		};
+	}
+
+	function tab(index){
+		var aUl = aDiv[index].getElementsByTagName('ul')[0];
+		var aLi = aUl.getElementsByTagName('li');
+		var This = aDiv[index];
+
+		for(var i=0;i<aDiv.length;i++){
+			aDiv[i].className = "hide";
+		}
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].style.background = '#5a5a52';
+		}
+		aDiv[index].className = "";
+
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].index1 = i;
+			aLi[0].style.background = '#ef3163';
+			aLi[i].onmouseover = function(){
+				for(var i=0;i<aLi.length;i++){
+				aLi[i].style.background = '#5a5a52';
+				}
+				this.style.background = '#ef3163';
+				var Arr = arr[index];
+				This.getElementsByTagName('img')[0].src = Arr[this.index1];
+			}
+		}
+	}
+
+
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="side">
+			<div id="hot" class="left"><img src="img/5.4_side1.png" alt=""/><p>最热团购</p></div>
+			<div id="cheap" class="left"><img src="img/5.4_side2.png" alt=""/><p>商城特惠</p></div>
+			<div id="recommend" class="left"><img src="img/5.4_side3.png" alt=""/><p>名品推荐</p></div>
+			<div id="activity" class="left"><img src="img/5.4_side4.png" alt=""/><p>缤纷活动</p></div>
+		</div>
+		<div id="main">
+			<div id="hot_ctent">
+				<img src="img/5.4_right11.png" alt="" />
+				<ul>
+					<li>雅诗兰黛完美修护唇膏3.6g</li>
+					<li>雅诗兰黛花漾唇膏01#&nbsp3.8g</li>
+					<li>倩碧卓越润肤乳&nbsp125ml</li>
+				</ul>
+			</div>
+			<div id="cheap_ctent" class="hide">
+				<img src="img/5.4_right21.png" alt="" />
+				<ul>
+					<li>肌研满150减30</li>
+					<li>高性价比低单价商品2.8折起</li>
+					<li>贝德玛满228送128</li>
+					<li>吃出健康态，2.8折起</li>
+				</ul>
+			</div>
+			<div id="recommend_ctent" class="hide">
+				<img src="img/5.4_right31.png" alt="" />
+				<ul>
+					<li>艾格利克全场1.5折起</li>
+					<li>N01dora全场1.4折七</li>
+					<li>伊米妮全场1折起</li>
+					<li>小熊电器全场一折起</li>
+					<li>贝缇卡全场1折起</li>
+				</ul>
+			</div>
+			<div id="activity_ctent" class="hide">
+				<img src="img/5.4_right41.png" alt="" />
+				<ul>
+					<li>万达大歌星2小时欢唱券</li>
+					<li>Free派-高丝娜蔻眼霜</li>
+					<li>财付通下单立减</li>
+					<li>Free派-芙优润天蚕丝面膜</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

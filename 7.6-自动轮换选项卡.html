@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>自动轮换选项卡</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+#wrap{width:442px;height:650px;background:#EFEFE7;margin: 30px auto;}
+#list{width:300px;height:40px;}
+#list ul{background:#A6E6FD;}
+#list ul li{float:left;line-height: 40px;text-align: center;width:148px;border-right:2px solid #fff;font-size: 16px;}
+#main{}
+#img{float:left;}
+#list2{float:left;}
+#list2 ul{width:40px;background:#A6E6FD;}
+#list2 ul li{height:80px;width:20px;text-align: center;padding:10px 10px;border-bottom: 1px solid #fff;font-size: 16px;}
+.top{background:#AF00A8;}
+.right{background:#AA73D1}
+</style>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript">
+$(function(){
+	/*
+		1.自动轮播菜单
+		2.轮播菜单时，右边菜单依次显示图片
+	*/
+	var oList = $('list');
+	var oImg = $('img');
+	var oList2 = $('list2');
+	var oLi = oList.getElementsByTagName('li');
+	var aLi = oList2.getElementsByTagName('li');
+	var num = 0;
+	var num2 = 0;
+	var timer = null;
+	var tab = null;
+
+	var arr1 = ['img/7.6_bg11.jpg','img/7.6_bg12.jpg','img/7.6_bg13.jpg','img/7.6_bg14.jpg'];
+	var arr2 = ['img/7.6_bg21.jpg','img/7.6_bg22.jpg','img/7.6_bg23.jpg','img/7.6_bg24.jpg'];
+	var Arr = [arr1,arr2];
+
+	 Autotab1();
+
+	function Autotab1(){
+		tab = setInterval(function(){
+			clearInterval(timer);
+			Tab1();
+			num++;
+			num%=oLi.length;
+		},4500);
+	}
+	//控制top的切换
+
+	function Tab1(){
+		clearInterval(timer);
+		Autotab2(num);
+		for(var i=0;i<oLi.length;i++){
+			oLi[i].className = '';
+		}
+		oLi[num].className = 'top';
+	}
+
+	function Autotab2(num){
+		timer = setInterval(function(){
+				Tab2(num);
+				num2++;
+				num2%=aLi.length;
+		},1000)
+	}
+
+	function Tab2(num){
+		var arr = Arr[num];
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].className = '';
+		}
+		aLi[num2].className = 'right';
+		oImg.src = arr[num2];
+	}
+
+
+
+});
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="list">
+			<ul>
+				<li class="top">菜单一</li>
+				<li>菜单二</li>
+			</ul>
+		</div>
+		<div id="main">
+			<div>
+				<img id="img" src="img/7.6_bg11.jpg" />
+			</div>
+			<div id="list2">
+				<ul>
+					<li class="right">图片一</li>
+					<li>图片二</li>
+					<li>图片三</li>
+					<li>图片四</li>
+				</ul>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

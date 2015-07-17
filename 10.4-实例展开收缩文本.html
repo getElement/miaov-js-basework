@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>展开收缩</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<style type="text/css">
+p{width:400px;margin: 50px auto;border:1px solid gray;}
+</style>
+</head>
+<body>
+	<p><span>这是一个看脸的社会,除了人,车也一样需要看脸。一款卖相还算不错的新车,除了价格、配置和动力以外,外观是诸多消费者关心的重要条件之一。在本期中,我们将给大家带来2015年上半年上市的进口车,这些车型都无一例外的玩起了个性,其中涵盖了2015年上市的主流车型,包括了全新奥迪TT、雷诺卡缤、丰田新一代埃尔法、大众up!等</span>......<a href="javascript:;">>>收缩</a>
+	</p>
+<script type="text/javascript">
+var oP = document.getElementsByTagName('p')[0];
+var oSpan = oP.getElementsByTagName('span')[0];
+var oA = oP.getElementsByTagName('a')[0];
+var str = oSpan.innerHTML;
+var onOff = true;
+
+oA.onclick = function(){
+	if(onOff){
+		oSpan.innerHTML = str.substring(0,20);
+		oA.innerHTML = '>>展开';
+	}else{
+		oSpan.innerHTML = str;
+		oA.innerHTML = '>>收缩';
+	}
+	onOff = !onOff;
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>控制多组图片切换</title>
+<style type="text/css">
+*{margin:0; padding:0;}
+a{text-decoration: none;}
+body{position:relative; margin:0; padding:0;}
+#btn1{position:absolute; top:20px; left:20%;}
+#btn2{position:absolute; top:20px; left:25%;}
+#group1{width:500px; height:369px;position:absolute; top:50px; left:180px;}
+#group2{width:418px; height:369px;position:absolute; top:50px; left:700px;}
+p{text-align: center;}
+span{display:none;position:absolute;top:100px;}
+.prev_bg,.next_bg { position:absolute; top:20px; z-index:5; width:200px; height:369px;}
+.prev,.prev_bg{ left:0;}
+.next,.next_bg{ right:0;}
+
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	/*
+	分析
+	1.左右两个div分别用换src的方式实现切换图片
+	2.用num1 num2定义当前左右两个切换图片的张数
+	3.分别给两个button,连个prev next添加点击事件
+	4.给两个prev和next添加onmouseover和onmouseout事件
+	5.用a标签控制移入移出
+	6.封装换src的函数
+	*/
+	var oBtn1 = document.getElementById('btn1');
+	var oBtn2 = document.getElementById('btn2');
+	var oGroup1 = document.getElementById('group1');
+	var oGroup2 = document.getElementById('group2');
+	var oImg1 = oGroup1.getElementsByTagName('img')[0];
+	var oImg2 = oGroup2.getElementsByTagName('img')[0];
+	var oP = document.getElementsByTagName('p');
+	var oContain = document.getElementById('contain');
+
+	var num = 0;
+	var num2 = 0;
+	var arrUrl2 = ['img2/1.png', 'img2/2.png', 'img2/3.png', 'img2/4.png'];
+	var arrUrl1 = ['img2/3.2_1.jpg', 'img2/3.2_2.jpg', 'img2/3.2_3.jpg'];
+	var len1 = arrUrl1.length;
+	var len2 = arrUrl2.length;
+
+	//封装获取class的方法
+	function getByClass(oParent,sClass){
+		var aEle = oParent.getElementsByTagName('*');
+		var arr = [];
+
+		for(var i=0; i<aEle.length;i++)
+			if(aEle[i].className == sClass){
+				arr.push(aEle[i]);
+			}
+		return arr;
+	}
+
+	//封装第一组图片的切换
+	function fnTab1(){
+		oImg1.src = arrUrl1[num];
+		oP[0].innerHTML = num+1 + '/' + len1;
+		oP[1].innerHTML = '第一组第' + (num+1) + '张';
+	}
+
+	//封装第二组图片的切换
+	function fnTab2(){
+		oImg2.src = arrUrl2[num2];
+		oP[2].innerHTML = num2+1 + '/' + len2;
+		oP[3].innerHTML = '第一组第' + (num2+1) + '张';
+	}
+
+	fnTab1();
+	fnTab2();
+
+	var oPrev = getByClass(oContain,'prev');
+	var oPrevBg = getByClass(oContain,'prev_bg');
+	var oNext = getByClass(oContain,'next');
+	var oNextBg = getByClass(oContain,'next_bg');
+
+	//给页面所有prev和next添加移入移出事件
+	for(var i=0;i<oPrev.length;i++){
+		oPrev[i].index = i;
+		oPrevBg[i].index = i;
+		oNext[i].index = i;
+		oNextBg[i].index = i;
+		oPrevBg[i].onmouseover  = function(){
+			oPrev[this.index].style.display = 'block';
+		}
+		oPrevBg[i].onmouseout = function(){
+			oPrev[this.index].style.display = 'none';
+		}
+		oNextBg[i].onmouseover = function(){
+			oNext[this.index].style.display = 'block';
+		}
+		oNextBg[i].onmouseout = function(){
+			oNext[this.index].style.display = 'none';
+		}
+	};
+	
+	//	给按钮添加前后切换的点击事件
+	oPrevBg[0].onclick = function(){
+		num--;
+  		if(num==-1){
+  			num=0;
+  		}
+  		fnTab1(); 
+  	};
+  	oNextBg[0].onclick = function(){
+  		num++;
+		if(num==3){
+			num=2;
+		}
+		fnTab1();
+  	};
+  	oPrevBg[1].onclick = function(){
+	    num2--;
+ 		if(num2==-1){
+ 			num2=0;
+ 		}
+ 		fnTab2();
+ 	};
+ 	oNextBg[1].onclick = function(){
+ 		num2++;
+		if(num2==4){
+		  num2=3;
+		}
+		fnTab2();
+ 	};
+ 	//给两个button添加成组的切换
+ 	oBtn1.onclick = function(){
+	    num--;
+		if(num==-1){
+		  num=2;
+		}
+		fnTab1();
+		
+		num2--;
+		if(num2==-1){
+		  num2=3;
+		}
+		fnTab2();
+  	}
+  
+	oBtn2.onclick = function(){
+	    num++;
+		if(num==3){
+		  num=0;
+		}
+		fnTab1();
+		
+		num2++;
+		if(num2==4){
+		  num2=0;
+		}
+		fnTab2();
+  	}
+}
+</script>	
+</head>
+<body>
+	<div id="contain">
+		<input id="btn1" type="button" value="前一组" />
+		<input id="btn2" type="button" value="后一组" />
+		<div id='group1'>
+			<p>图片数量正在加载...</p>
+			<img src="img2/3.2_1.jpg" />
+			<a class="prev_bg" ></a>
+			<a class="next_bg" ></a>
+			<span class="prev"><img src="img2/prev.png" /></span>
+			<span class="next"><img src="img2/next.png" /></span>
+			<p>图片描述正在加载...</p>
+		</div>
+		<div id="group2">
+			<p>图片数量正在加载...</p>
+			<img src="img2/1.png" />
+			<a class="prev_bg" ></a>
+			<a class="next_bg" ></a>
+			<span class="prev"><img src="img2/prev.png" /></span>
+			<span class="next"><img src="img2/next.png" /></span>
+			<p>图片描述正在加载...</p>
+		</div>
+	</div>
+</body>
+</html>

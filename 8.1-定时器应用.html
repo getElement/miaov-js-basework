@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>定时器应用</title>
+<style type="text/css">
+#div1{width:100px;height:100px;background:red;position: absolute; top:50px; left: 30px;}
+</style>
+</head>
+<body>
+	<input id="btn1" type="button" value="按钮" />
+	<div id="div1"></div>
+<script type="text/javascript">
+var oBtn = document.getElementById('btn1');
+var oDiv = document.getElementById('div1');
+//oDiv.timer = null;
+oBtn.onclick = function(){
+	clearInterval(oDiv.timer);
+	oDiv.timer = setInterval(function(){
+		var speed = parseInt(getStyle(oDiv,'left')) + 5;
+		if(speed > 800){
+			speed = 800;
+		}
+		oDiv.style.left = speed + 'px';
+		if(speed == 800){
+			clearInterval(oDiv.timer);
+		}
+	},30)
+	
+}
+
+function getStyle(obj,attr){
+	return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+}
+</script>
+</body>
+</html>

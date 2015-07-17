@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抖动</title>
+<style type="text/css">
+img{position: absolute; top:200px;left:300px;}
+#img1{position: absolute; top:200px;left:300px;}
+#img2{position: absolute; top:200px;left:600px;}
+</style>
+<script type="text/javascript" src="js/xg.js"></script>	
+<script type="text/javascript">
+window.onload = function(){
+	var oImg = document.getElementById('img1');
+	var oImg2 = document.getElementById('img2');
+	oImg.onclick = fnShake;
+	oImg2.onclick = fnShake;
+
+	function fnShake(){
+		var This = this;
+		shake(This,'left',function(){
+			shake(This,'top')
+		});
+	}
+
+	function shake(obj,attr,endFn){
+		var pos = parseInt(getStyle(obj,attr));
+		var arr = [];	//20,-20,....0
+		var num = 0;
+
+		for(var i=20;i>0;i-=2){
+			arr.push(i,-i);
+		}
+		arr.push(0);
+		clearInterval(obj.shake);
+		obj.shake = setInterval(function(){
+			obj.style[attr] = pos + arr[num] +'px';
+			num++;
+			if(num === arr.length){
+				clearInterval(obj.shake);
+				endFn && endFn();
+			}
+		},50);
+	}
+}
+</script>
+</head>
+<body>
+<img id="img1" src="img/1.png" alt="" />
+<img id="img2" src="img/2.png" alt="" />
+</body>
+</html>

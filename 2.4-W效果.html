@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+<style type="text/css">
+div{width:50px; height:50px; background:red;position:absolute;top:0;left:0;font-size: 30px; text-align: center; line-height: 50px; color:orange;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oDiv = document.getElementsByTagName('div');
+	var o = 9;
+	var k=o;
+
+	for(var i=0;i<o;i++){	
+		document.body.innerHTML += '<div>'+i+'</div>';
+		oDiv[i].style.left = 10+i*60 +'px';	
+		oDiv[i].style.top = 10+i*60 +'px';
+	};
+	for(var j=0;j<o;j++){	
+		k--;
+		document.body.innerHTML += '<div>'+j+'</div>';
+		oDiv[j+o].style.left = 10+(j+o)*60 +'px';	
+		oDiv[j+o].style.top = 10+(k)*60 +'px';
+	};
+		for(var j=0;j<o;j++){	
+		document.body.innerHTML += '<div>'+j+'</div>';
+		oDiv[j+2*o].style.left = 10+(j+2*o)*60 +'px';	
+		oDiv[j+2*o].style.top = 10+(j)*60 +'px';
+	};
+	var k=o;
+		for(var j=0;j<o;j++){
+		k--;	
+		document.body.innerHTML += '<div>'+j+'</div>';
+		oDiv[j+3*o].style.left = 10+(j+3*o)*60 +'px';	
+		oDiv[j+3*o].style.top = 10+(k)*60 +'px';
+	};
+
+	
+
+
+
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

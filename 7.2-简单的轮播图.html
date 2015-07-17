@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>简单的轮播图</title>
+<style type="text/css">
+body{background:#333;}
+ul{padding:0; margin:0;}
+li{list-style: none;}
+#pic{width:400px; height:500px;position:relative;margin:0 auto;background:#fff url(img/loader_ico.gif) no-repeat center;}
+#pic img{width:400px;height:500px;
+}
+#pic ul{position:absolute; width:40px;top:0; right:-50px;}
+#pic li{width:40px;height:40px;margin-bottom: 4px;background:#666;}
+#pic .active{background:#FC3;}
+#pic p,#pic span{width:400px;height:30px;line-height: 30px; text-align: center; color:#fff;position:absolute;left:0; background:#000;}
+#pic span{top:0;}
+#pic p{bottom:0;margin:0;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oDiv = document.getElementById('pic');
+	var oImg = oDiv.getElementsByTagName('img')[0];
+	var oSpan = oDiv.getElementsByTagName('span')[0];
+	var oP = oDiv.getElementsByTagName('p')[0];
+	var oUl = oDiv.getElementsByTagName('ul')[0];
+	var oLi = oUl.getElementsByTagName('li');
+	var arrUrl = ['img/1.png','img/2.png','img/3.png','img/4.png'];
+	var arrText = ['小宠物','图片二','图片三','面具'];
+	var num = 0;
+	var timer = null;
+
+	function autoPlay(){
+		timer = setInterval(function(){
+			num++;
+			num %= arrText.length;
+			fnTab();
+		},1000);
+	}
+	
+
+	setTimeout(autoPlay,3000);
+
+	oDiv.onmouseover = function(){
+		clearInterval(timer);
+	};
+	oDiv.onmouseout = autoPlay;
+
+
+	for(var i=0;i<arrUrl.length;i++){
+		oUl.innerHTML += '<li></li>';
+	}
+
+	oldLi = oLi[num];
+
+	function fnTab(){
+		oImg.src = arrUrl[num];
+		oSpan.innerHTML = 1+num+'/'+arrUrl.length;
+		oP.innerHTML = arrText[num];
+		for(var i=0;i<oLi.length;i++){
+			oLi[i].className = '';
+		};
+		oLi[num].className = 'active';
+	};
+
+	fnTab();
+	//初始化
+	for(var i=0;i<oLi.length;i++){
+		oLi[i].index = i;
+		oLi[i].onclick = function(){
+			num = this.index;
+			fnTab();
+		};	
+
+	};
+
+
+
+
+
+
+
+}
+</script>
+</head>
+<body>
+	<div id="pic">
+		<img src="" />
+		<span>1/4</span>
+		<p>文字说明正在加载中...</p>
+		<ul></ul>
+	</div>
+</body>
+</html>

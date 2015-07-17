@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>找到合适的qq号码</title>
+<script type="text/javascript">
+/*
+	1.判断input的value值是否为空
+	2.判断typeof === 'number' && 等于本身 或者直接用isNaN
+	3.利用charAt(0) === 0 判断首位是否为0
+	4.利用parseInt == parseFloat
+	5.调用数字的长度
+*/
+	window.onload = function(){
+		var oInput = document.getElementsByTagName('input')[0];
+		var oBtn = document.getElementsByTagName('input')[1];
+		var str = '';
+
+		oBtn.onclick = function(){
+			str =  oInput.value;
+			if(str == ''){
+				alert('请输入QQ号码：');
+			}else if(isNaN(str)){
+				alert('请输入数字');
+			}else if(Number(str.charAt(0)) == 0){
+				alert('首位数字不能为0');
+			}else if(!(parseInt(str) == parseFloat(str))){
+				alert('不能输入小数');
+			}else if((str.length<5) || (str.length>10)){
+				alert('请输入5位以上，10位以下的数字');
+			}else{
+				alert('恭喜你，验证成功');
+			};
+		};
+	}
+
+</script>
+</head>
+<body>
+
+请输入QQ号码：<input type="text" />
+<input type="button" value="判断" />
+
+
+<br />
+1、有没有输入<br />
+2、输入的是不是数字<br />
+3、不能有0在前面<br />
+4、不能是小数<br />
+5、输入的数字必须在5位以上、10位以内<br />
+
+</body>
+</html>

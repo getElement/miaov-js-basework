@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>图片时间升级版</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<style type="text/css">
+ul{margin:80px 35% 0 35%;}
+ul li{float:left;position: relative;width:50px;height:80px;overflow: hidden;}
+ul li div{float:left; width:50px;position: absolute;left:0; top:0;}
+ul img{width:50px;height:80px;}
+.colon{width:50px;}
+</style>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript">
+/*
+9-4倒计时升级版
+思路：
+	1、定义一个ul li 结构，li里面套div，每个div有两个图片依次排开
+	2、通过移动图片的top值来切换数字
+	3、首先获取当前的动态时间，然后图片的路径和时间一一对应，使用charAt函数获取第几个字符串，
+	4、开启一个定时器，一秒钟滚动一次。
+*/
+window.onload = function(){
+
+	var oBody = document.body;
+	var oP = document.getElementsByTagName('p')[0];
+	var oUl = document.getElementsByTagName('ul')[0];
+	var oLi = oUl.getElementsByTagName('li');
+	var timer = 0;
+
+	fnTime();
+	setInterval(fnTime, 1000);
+
+	function toTwo(n){
+		return n<10?'0'+n:''+n;
+	}
+
+	function fnTime(){
+		var myTime = new Date();
+		var iHours = myTime.getHours();
+		var iMin = myTime.getMinutes();
+		var iSec = myTime.getSeconds();
+		str = toTwo(iHours) + ':' + toTwo(iMin) + ':' + toTwo(iSec);
+
+		oP.innerHTML = str;
+
+		function TabImg(li,index){
+			var oDiv = li.getElementsByTagName('div')[0];
+			var oImg = li.getElementsByTagName('img');
+			if(str.charAt(index) == ':'){
+				oImg[0].src = 'img2/colon.jpg';
+			}else{
+				oImg[1].src = 'img2/' + str.charAt(index) + '.JPG';
+				if(oImg[0].src != oImg[1].src){
+					doMove(oDiv,'top',10,'-80',function(){
+						oImg[0].src = oImg[1].src;
+						oDiv.style.top = 0 + 'px';
+					})
+				}
+			}
+		}
+
+		for(var i=0;i<oLi.length;i++){
+			TabImg(oLi[i],i);
+		}
+	}
+
+}
+</script>
+</head>
+<body>
+	<p>170538</p>
+	<ul>
+		<li>
+			<div>
+				<img src="img2/0.jpg">
+				<img src="img2/0.jpg">
+			</div>
+		</li>
+		<li>
+			<div>
+				<img src="img2/0.jpg">
+				<img src="img2/0.jpg">
+			</div>
+		</li>
+		<li class="colon">
+			<div>
+				<img src="img2/colon.jpg">				
+			</div>
+		</li>
+		<li>
+			<div>
+				<img src="img2/0.jpg">
+				<img src="img2/0.jpg">
+			</div>
+		</li>
+		<li>
+			<div>
+				<img src="img2/0.jpg">
+				<img src="img2/0.jpg">
+			</div>
+		</li>
+		<li class="colon">
+			<div>
+				<img src="img2/colon.jpg">				
+			</div>
+		</li>
+		<li>
+			<div>
+				<img src="img2/0.jpg">
+				<img src="img2/0.jpg">
+			</div>
+		</li>
+		<li>
+			<div>
+				<img src="img2/0.jpg">
+				<img src="img2/0.jpg">
+			</div>
+		</li>
+	</ul>
+</body>
+</html>

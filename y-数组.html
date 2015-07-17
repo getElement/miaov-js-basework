@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组</title>
+<style type="text/css">
+#content{width:400px;height:400px;border:10px solid #ccc;margin:40px auto 0; position:relative;background:#f1f1f1;}
+#content a{width:40px; height:40px; background:#000;border:1px solid #fff;position:absolute; top:175px;text-align: center;text-decoration:none; line-height:40px; color:#fff;font-size: 30px;font-weight: bold; filter:alpha(opacity:70);opacity:0.7}
+#content a:hover{filter:alpha(opacity:90);opacity:0.9}
+#btn1{margin-left:600px;}
+#btn2{}
+#prev{left:10px;}
+#next{right:10px;}
+#text,#span1{position:absolute;left:0; width:400px;height:30px;line-height: 30px; text-align: center; color:#fff;background:#000;filter:alpha(opacity:70);opacity:0.7;}
+#text{bottom:0;margin:0;}
+#span1{top:0;}
+#img1{width:400px;height:400px;}
+p{margin-left:580px;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oPrev = document.getElementById("prev");
+	var oNext = document.getElementById("next");
+	var oText = document.getElementById("text");
+	var oSpan = document.getElementById("span1");
+	var oImg = document.getElementById("img1");
+	var Btn1 = document.getElementById("btn1");
+	var Btn2 = document.getElementById("btn2");
+	var oP = document.getElementById('p');
+
+	var arrUrl = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg'];
+	var arrText = ['游戏美女','人造运动员','性感美女','古装美女'];
+
+	var num = 0;
+
+	scrollTap();
+	//初始化
+	function fnTab(){
+		oSpan.innerHTML = num+1 + '/' + arrText.length;
+		oImg.src = arrUrl[num];
+		oText.innerHTML = arrText[num];
+	};
+	function scrollTap(){
+		fnTab();
+
+		oNext.onclick =function(){
+			num++;
+			if(num == arrText.length){
+				num = 0;
+			};
+
+			fnTab();
+		};
+
+		oPrev.onclick = function(){
+			num--;
+			if(num == -1){
+				num = arrText.length-1;
+			};
+
+			fnTab();		
+		};
+	};
+
+	function listTap(){
+		fnTab();
+		oNext.onclick =function(){
+
+			if(num == arrText.length-1){
+				alert("这已经是最后一张了，不能往后啦~");
+				num = arrText.length-2;
+			}
+				num++;
+
+			fnTab();
+		};
+		oPrev.onclick = function(){
+			if(num == 0){
+				alert("这已经是第一张了，不能往前啦~");
+				num = 1;
+			}
+				num--;
+
+			fnTab();		
+		}
+
+	};
+
+	Btn1.onclick = function(){
+		scrollTap();
+	}
+
+	Btn2.onclick = function(){
+		oP.innerHTML = '图片只能从最后一张或者第一张切换'
+		listTap();
+	}
+
+		
+};
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<input id="btn1" type="button" value="循环切换" />
+		<input id="btn2" type="button" value="顺序切换" /></br>
+		<p id="p">图片可以从最后一张循环播放</p>
+		<div id="content">
+			<a id="prev" href="javascript:;"><<</a>
+			<a id="next" href="javascript:;">>></a>
+			<p id="text">图片文字加载中...</p>
+			<span id="span1">数量正在计算中...</span>
+			<img id="img1" />
+		</div>
+	</div>
+</body>
+</html>

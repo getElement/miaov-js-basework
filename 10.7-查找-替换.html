@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>查找，替换</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<style type="text/css">
+html{background: #EFEFE7;}
+#wrap{width:600px;height:300px;background:#fff;margin:50px auto;}
+p{width:400px;height:250px;margin:40px;float: left;margin-bottom: 0;}
+#bar{float:right;height:150px;margin-right: 60px;margin-top: 40px;cursor:pointer;}
+.subar{height:40px;width:60px;background:#c0c0c0;margin-top: 5px;text-align: center;line-height: 40px;float: left;}
+#list-down{height:100px;width:60px;display: none;}
+#bottom{width:590px;height:100px;clear: both;margin: 0 auto;border:5px solid #E71063;background: #E7E7B5;display: none;}
+#close{float:right;width:60px;height:40;border-radius:4px;background: #996363;margin-right: 40px;text-align: center;line-height: 30px;color:#fff;cursor:pointer;}
+ul{width:590px;height:30px;margin-top: 10px;border-bottom: 2px solid red;}
+ul li{float: left;margin-left: 20px;width:50px;height:30px;text-align: center;line-height: 30px;cursor:pointer;}
+#searched{margin-left: 20px;margin-top: 15px;}
+#replaced{margin-left: 20px;margin-top: 15px;display: none;}
+.clor1{background:#E76308;}
+</style>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript">
+/*
+10-7-查找，替换
+思路：
+	需要实现的功能：
+	1、展开，实现下拉列表功能，查询，替换，
+	2、点击查询，出现查询框，点击替换，出现替换框
+	3、输入数据，查找到需要查找的字符串，显示高亮
+	如果输入的数据不是文本内的文字，弹出未查找到。
+	4、输入数据，如果有替换，如果没有找到弹出未找到，如果替换的是空字符串，提示是否需要删除文字。
+分析：
+	1、下拉列表采用onmouseover事件显示，
+	2、点击查询显示隐藏的查询框，点击替换，出现替换框
+	3、输入数据，点击查找，如果str.indexOf()返回-1显示未查找到，如果有，利用str.indexOf()返回字符串。
+	4、输入数据，如如果str.indexOf()返回-1，未找到，如果有新定义一个变量，将处理过的字符串赋给文本框的innerHTML，
+*/
+
+window.onload = function(){
+
+	var oP = document.getElementsByTagName('p')[0];
+	var oList = $('list');
+	var oBar = $('bar');
+	var oList_down = $('list-down');
+	var oSrch = $('search');
+	var oRpce = $('replace');
+	var oBtm = $('bottom');
+	var oUl = oBtm.getElementsByTagName('ul')[0];
+	var oLi = oUl.getElementsByTagName('li');
+	var oSrched = $('searched');
+	var oRpced = $('replaced');
+	var oIput = oSrched.getElementsByTagName('input'); 
+	var aIput = oRpced.getElementsByTagName('input'); 
+	var oClose = $('close');	
+
+	oList.onmouseenter = function(){
+		oList_down.style.display = 'block';
+	}
+	oList_down.onmouseleave = function(){
+		this.style.display = 'none';
+	}
+	In(oSrch,'#E76308');
+	Out(oSrch,'#c0c0c0');
+	In(oRpce,'#E76308');
+	Out(oRpce,'#c0c0c0');
+	In(oLi[0],'#c0c0c0');
+	Out(oLi[0],'');
+	In(oLi[1],'#c0c0c0');
+	Out(oLi[1],'');
+
+	oLi[0].onclick = function(){
+		oRpced.style.display = 'none';
+		oSrched.style.display = 'block';
+	}
+	oLi[1].onclick = function(){
+		oSrched.style.display = 'none';
+		oRpced.style.display = 'block';
+	}
+	
+	oSrch.onclick = function(){
+		oBtm.style.display = 'block';
+		oRpced.style.display = 'none';
+		oSrched.style.display = 'block';
+	}
+
+	oRpce.onclick = function(){
+		oBtm.style.display = 'block';
+		oSrched.style.display = 'none';
+		oRpced.style.display = 'block';
+	}
+
+	oClose.onclick = function(){
+		oBtm.style.display = 'none';
+	}
+
+	oIput[1].onclick = function(){
+		search();
+	}
+	aIput[2].onclick = function(){
+		replace();
+	}
+
+	function In(obj,color){
+		obj.onmouseover = function(){
+			this.style.background = color;
+		};
+	}
+	function Out(obj,color){
+		obj.onmouseout = function(){
+			this.style.background = color;
+		};
+	}
+	
+	function search(){
+		var str = '';
+		str = oP.innerHTML;
+		var str1 = oIput[0].value;
+		if(!str1){
+			alert('请输入要查找的内容')
+		}else{
+			if(str.indexOf(str1) == -1){
+				alert('对不起，没有找您输入的【'+str1+'】');
+				oP.innerHTML = str;
+				oIput[0].value = '';
+			}else{
+				oP.innerHTML = str;
+				var arr = str.split(str1);
+				oP.innerHTML = arr.join('<span style="background:yellow;">'+str1+'</span>');
+				oIput[0].value = '';
+			}
+		}
+
+	}
+
+	function replace(){
+		var str = ''
+		str = oP.innerHTML;
+		var str1 = aIput[0].value;
+		var str2 = aIput[1].value;
+		if(!str1){
+			alert('请输入要替换的内容');
+		}else{
+			if(str.indexOf(str1) == -1){
+				alert('对不起，没有找您输入的【'+str1+'】');
+			}else{
+				if(!str2){
+					var r = comfirm('确定要删除所选的文字吗?');
+					if(r){
+						aIput[0].value = '';
+						return;
+					}
+				}
+				var arr = str.split(str1);
+				oP.innerHTML = arr.join(str2);
+				str = oP.innerHTML;
+				aIput[0].value = '';
+				aIput[1].value = '';
+			}
+		}
+	}
+
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<p>“新华视点”记者采访了解到,由于我国南北温差较大,对于高温津贴发放的标准、对象、方式并未做全国统一性规定,均以各地人社等部门发放的文件规定为准,因此各地情况差异较大。<br/>有的省市在相关规定中,还将高温津贴发放范围在国家规定的基础上有所扩大。比如,山东省将高温津贴分为从事室外作业和高温作业人员、非高温作业人员两类,明确企业在岗且提供正常劳动的职工列入发放范围。据山东省劳动部门工作人员介绍,这项关于夏季防暑降温费的规定,是针对所有在岗职工的,无论从事何种工种,均可按标准享受津贴。</p>
+		<div id="bar">
+			<div id="list" style="background: #94948C;"class="subar">展开</div>
+			<div id='list-down'>
+				<div id="search" class="subar">查找</div>
+				<div id="replace"class="subar">替换</div>
+			</div>
+		</div>
+	</div>
+	<div id="bottom">
+			<ul>
+				<li>查找</li>
+				<li>替换</li>
+				<div id="close">关闭</div>
+			</ul>
+			<div id="searched">
+				<input type="text" />
+				<input type="button" value="查找" />
+			</div>
+			<div id="replaced">
+				<input type="text" />
+				<input type="text" />
+				<input type="button" value="替换" />
+			</div>
+		</div>
+</body>
+</html>

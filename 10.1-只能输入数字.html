@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>只能输入数字</title>
+</head>
+<body>
+	<input type="text" />
+	<input type="button" value="检测" />
+<script type="text/javascript">
+var oInp = document.getElementsByTagName('input');
+oInp[1].onclick = function(){
+	var val = oInp[0].value;
+	console.log(detectNum(val));
+	if(detectNum(val)){
+		alert('恭喜，'+val+'全是数字');
+	}else{
+		alert('输入有误');
+	}
+}
+function detectNum(str){
+	for(var i=0;i<str.length;i++){
+		var n = 0;
+		n = str.charCodeAt(i);
+		if(n<48 || n>57){
+			return false;
+		}
+	}
+	return true;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>属性读写操作HTML小练习</title>
+<style type="text/css">
+div{width:240px;height:300px;border:1px solid #333;background:#F1F1F1;padding:10px;}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var oDiv = document.getElementById('div1');
+		var oSpan = document.getElementById('span1');
+		var oText = document.getElementById('text1');
+		var oBtn= document.getElementById('btn1');
+
+		oBtn.onclick = function(){
+			oDiv.innerHTML += oSpan.innerHTML+ oText.value + '<br/>'; 
+			oText.value=""; //清空
+		};
+	}
+</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<span id="span1">信管基地：</span>
+	<input id="text1"type="text" />
+	<input id="btn1" type="button" value="提交" />
+</body> 
+</html>

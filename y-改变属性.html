@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>改变属性</title>
+<style type="text/css">
+	#div1{
+		width:200px;
+		height:200px;
+		border:1px solid red;
+		margin-top:10px;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var oAttr = document.getElementById('attr');
+		var oVal = document.getElementById('val');
+		var oBtn = document.getElementById('btn1');
+		var oDiv = document.getElementById('div1');
+
+		oBtn.onclick = function(){
+
+			oDiv.style[oAttr.value] = oVal.value;
+
+		};
+	}
+</script>
+</head>
+<body>
+	请输入属性名称<input id="attr" type="text" /></br>
+	请输入属性值：<input id="val" type="text" / >
+	<input id="btn1" type="button" value="确定" />
+	<div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>按钮控制商品上下滚动</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+img{vertical-align: top;}
+#wrap{width:184px; height:468px;background:#fff;margin: 50px auto;position: relative;overflow: hidden;}
+#header{width:168px; height:24px;background: url(img/7.5_headerbg.png) no-repeat;font-size: 12px;color:#fff;text-align: center;z-index: 2;position: absolute;top:0px;left:0px;}
+#top{width:168px;height:23px;position: absolute;top:24px;left:0px;background:url(img/7.5_topbg.png) no-repeat;z-index: 2;}
+#list{width:166px;border-right: 1px solid #ced6d6;border-left:  1px solid #ced6d6;position:absolute;top:47px;left:0px;}
+#list li{border-bottom: 1px solid #ced6d6;}
+#footer{width:168px;height:24px;position: absolute;bottom:0px;left:0px;background:url(img/7.5_footerbg.png) no-repeat;z-index: 2;}
+</style>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript">
+$(function(){
+	var oWrap = $('wrap');
+	var oTop = $('top');
+	var oFot = $('footer');
+	var oList = $('list');
+
+	//鼠标划过top图片上移
+	oTop.onmouseover = function(){
+		doMove(oList,'top',5,-480);
+	}
+	oTop.onmouseout = function(){
+		clearInterval(oList.timer);
+	}
+
+	//鼠标划过footer图片下移
+	oFot.onmouseover = function(){
+		doMove(oList,'top',5,0);
+	}
+	oFot.onmouseout = function(){
+		clearInterval(oList.timer);
+	}
+
+})
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">信管基地 >><a href="#">更多</a></div>
+		<div id="top"></div>
+		<ul id="list">
+			<li><img src="img/7.5_bg1.png"></li>
+			<li><img src="img/7.5_bg2.png"></li>
+			<li><img src="img/7.5_bg3.png"></li>
+			<li><img src="img/7.5_bg1.png"></li>
+			<li><img src="img/7.5_bg2.png"></li>
+			<li><img src="img/7.5_bg3.png"></li>
+			<li><img src="img/7.5_bg1.png"></li>
+			<li><img src="img/7.5_bg2.png"></li>
+			<li><img src="img/7.5_bg3.png"></li>
+		</ul>
+		<div id="footer"></div>
+	</div>
+</body>
+</html>

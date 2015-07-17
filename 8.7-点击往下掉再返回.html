@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击往下掉再返回</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+div{
+	width: 50px;
+	height:50px;
+	background:red;
+	position:absolute;
+	top:0;
+}
+</style>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript" >
+/*
+思路：1、事件为方块往下移动，移动为改变top值，调用domove函数，
+	  2、当最后一块方块到达底部的时候触发事件往回移动
+
+分析：1、当页面加载的时候自动生成20个方块
+	  2、用if(!finish){return:;}判断是否完成动作
+	  3、用flag?500:0 判断方向
+	  4、用num = len-1判断是否为最后一个div完成动作
+
+
+*/
+$(function(){
+	var str = '';	//用来拼接字符串
+	var len = '20'; // 定义方块的个数
+	var oDiv = document.getElementsByTagName('div');
+	var timer = null;  //定义空的定时器
+	var num = 0;	//用来标志第几个div
+	var flag = true;	//用flag表示方向
+	var finish = true;	//用来表示完成
+
+	//自动生成20个div
+	for(var i=0;i<len;i++){
+		str += '<div style="left:'+i*60+'px;"></div>';
+	}
+	document.body.innerHTML = str;
+
+	document.onclick = function(){
+		if(!finish){
+			return;
+		}	//如果点击，前一轮的动作没有完成就退出，将控制权交给页面
+
+		finish = false; //用来检测前一轮是否完成，新一轮开始则finish未完成为true
+
+		clearInterval(timer);	//清除定时器
+		timer = setInterval(function(){
+			doMove(oDiv[num],'top',23,flag?500:0,
+				(num == len - 1 )?function(){
+					finish = true;	//当最后一个方块落下的时候整体一轮动作完成
+					flag = !flag;
+				} :null);
+			num++;
+			
+			if(num == len){
+				clearInterval(timer);
+				num=0;
+			}	//如果最后一个方块落下，清除定时器，方块标数置零
+		},70)
+	};
+});
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

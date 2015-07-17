@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>百度文库评分</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+#wrap{width:504px;height:64px;border:1px solid #efa500;margin:20px auto;position: relative;}
+h2{font-size:18px;margin-left: 10px;width:82px;height:26px;float:left;line-height:64px; }
+#star{width:130px;height:44px;float:left;padding-top: 20px;}
+span{position: absolute;left:230px;top:18px;display: none;color:#e78418;}
+#notice{width:241px;height:64px;}
+</style>
+<script type="text/javascript" src="xg.js"></script>
+<script type="text/javascript">
+/*
+	1.划过星星span显示，提示消失
+	2.划过前两个星星显示灰色，span里显示较差
+	3.划过第三个星星显示橘色，span里显示一般
+	4.划过第四个星星显示橘色，span里显示推荐
+	5.划过第五个星星显示橘色，span里显示力荐
+	6.点击当前星星，不能滑动，再次点击还可以评分 可以定义一个开关
+
+*/
+
+$(function(){
+	var oWrap = $('wrap');
+	var oStar = $('star');
+	var oImg = $('star').getElementsByTagName('img');
+	var oSpan = $('wrap').getElementsByTagName('span')[0];
+	var oNotice = $('notice');
+	var offon = true;
+
+	oStar.onmouseover = function(){
+		oSpan.style.display = 'block';
+		oNotice.style.display = 'none';
+	}
+	oStar.onmouseout = function(){
+		oSpan.style.display = 'none';
+		oNotice.style.display = 'block';
+	}
+
+	for(var i=0;i<oImg.length;i++){
+		oImg[i].index = i;
+		oImg[i].onmouseover = function(){
+			if(offon){
+				fn2(this.index);
+			}
+		};
+		oImg[i].onmouseout = function(){
+			if(offon){
+				for(var i=(this.index+1);i<oImg.length;i++){
+				oImg[i].src = 'img/6.2_star.png';
+			}
+		};
+		}
+		oImg[i].onclick = function(){ 
+			fn2(this.index); 
+			offon = !(offon); 
+		}
+	}
+
+
+	function fn2(index){
+		if(index == 0){
+			for(var i=0;i<1;i++){
+				oSpan.innerHTML = '较差';
+				oImg[i].src = 'img/6.2_bstar.png';
+			};	
+		}else if(index == 1){
+			for(var i=0;i<2;i++){
+				oSpan.innerHTML = '较差';
+				oImg[i].src = 'img/6.2_bstar.png';
+			};
+		}else if(index == 2){
+			for(var i=0;i<3;i++){
+				oSpan.innerHTML = '一般';
+				oImg[i].src = 'img/6.2_astar.png';
+			};
+		}else if(index == 3){
+			for(var i=0;i<4;i++){
+				oSpan.innerHTML = '推荐';
+				oImg[i].src = 'img/6.2_astar.png';
+			};
+		}else if(index == 4){
+			for(var i=0;i<5;i++){
+				oSpan.innerHTML = '力荐';
+				oImg[i].src = 'img/6.2_astar.png';
+			};
+		}
+	}
+
+
+
+
+});
+
+
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<h2>总体评价</h2>
+		<div id="star">
+			<img src="img/6.2_star.png" />
+			<img src="img/6.2_star.png" />
+			<img src="img/6.2_star.png" />
+			<img src="img/6.2_star.png" />
+			<img src="img/6.2_star.png" />
+		</div>
+		<span id="appraise"></span>
+		<img id="notice" src="img/6.2_right.png" alt="提示" />
+	</div>
+</body>
+</html>

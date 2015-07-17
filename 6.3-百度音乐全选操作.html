@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>百度音乐全选操作</title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<style type="text/css">
+#wrap{width: 312px;height:218px;margin:30px auto; border:1px solid #8c8c8c;}
+ul{width:312px;height:182px;}
+ul li{height:25px;border-bottom: 1px solid #8c8c8c;position: relative;}
+input{margin-left:8px;line-height: 25px;}
+span{height:25px;display: inline-block;font-size: 14px;margin-left:40px;line-height: 25px;}
+strong{height:25px;display: inline-block;font-size: 14px;font-weight:normal;position: absolute;left:210px;top:5px;}
+#bottom{width:312px;height:33px;background: url(img/6.3_bottom.png);position: relative;}
+#all{position: absolute;top:10px;}
+</style>
+<script type="text/javascript" src="xg.js"></script>
+<script type="text/javascript">
+$(function(){
+var oWrap = $('wrap');
+var oUl = oWrap.getElementsByTagName('ul')[0];
+var oInput = oUl.getElementsByTagName('input');
+var oLi = oWrap.getElementsByTagName('li');
+var oAll = $('all');
+var num = 0;
+
+/*for(var i=0;i<oLi.length;i++){
+	oInput[i].onclick = function(){
+		if(this.checked == true){
+			num++;
+		}else{
+			num--;
+		}
+		if(num = oLi.length-1){
+			oAll.checked = true; 
+		}else{
+			oAll.checked = false;
+		}
+	}
+}*/
+
+oAll.onclick = function(){
+	if(this.checked){
+		for(var i=0;i<oLi.length;i++){
+			oInput[i].checked = true;
+		}
+	}else{
+		for(var i=0;i<oLi.length;i++){
+			oInput[i].checked = false;
+		}
+	}
+}
+
+
+});
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<ul>
+			<li><input type="checkbox" /><span>小宇宙</span><strong>苏打绿</strong></li>
+			<li><input type="checkbox" /><span>小情歌</span><strong>苏打绿</strong></li>
+			<li><input type="checkbox" /><span>你再烦恼什么</span><strong>苏打绿</strong></li>
+			<li><input type="checkbox" /><span>当我们一起走过</span><strong>苏打绿</strong></li>
+			<li><input type="checkbox" /><span>说了再见</span><strong>苏打绿</strong></li>
+			<li><input type="checkbox" /><span>他夏了夏天</span><strong>苏打绿</strong></li>
+			<li><input type="checkbox" /><span>我好想你</span><strong>苏打绿</strong></li>
+		</ul>
+		<div id="bottom"><input id="all" type="checkbox" /></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改文本框的值</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+#wrap{margin:0 auto;width:572px;}
+#wrap div{width:572px;height:30px;background:#6ba542;}
+#wrap div span{height:30px;margin-left: 20px;text-align: center;line-height: 30px;}
+#list{border:1px solid #bddede;border-bottom: none;width:570px;}
+#list li{width:570px;height:40px;background:#fff;border-bottom:1px solid #bddede;}
+#list p{width:100px;height:30px;vertical-align:top;margin-top: 5px;margin-left: 30px;float:left;}
+#list input{border:none;width:100px;height:30px;vertical-align:top;margin-top: 5px;margin-left: 30px;}
+#list img{width:30px;height: 39px; vertical-align: top; cursor: pointer;}
+#list span{margin-left: 20px; width:40px;height:40px;line-height: 40px;vertical-align:top;color:#429400;cursor: pointer;}
+.hide{display: none;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	/*
+		1.对表单进行操作没有移入的时候显示信管创业基地
+		2.图片点击的时候图片隐藏，input的宽度增加，等输入结束，
+		点击取消恢复input无值的状态，画笔显示，
+		点击保存保存，input长度恢复，画笔显示。
+
+	*/
+
+	var oList = document.getElementById('list');
+	var oLi = oList.getElementsByTagName('li');
+	var oImg = oList.getElementsByTagName('img');
+	var oSpan = oList.getElementsByTagName('span');
+	var oInput = oList.getElementsByTagName('input');
+	var oP = oList.getElementsByTagName('p');
+	
+	//初始化界面
+	for(var i=0; i<oInput.length; i++) {
+        oInput[i].value = oP[i].innerHTML;
+        oInput[i].className = 'hide';
+    };
+
+    for(var i=0;i<oSpan.length;i++){
+    	oSpan[i].className = 'hide';
+    };
+
+    for(var i=0;i<oImg.length;i++){
+    	fn1(oLi[i]);
+    }
+
+    function fn1(li){
+    	var aP = li.getElementsByTagName('p')[0];
+    	var aInput = li.getElementsByTagName('input')[0];
+    	var aSpan = li.getElementsByTagName('span');
+    	var aImg = li.getElementsByTagName('img')[0];
+
+    	aImg.onclick = function(){
+    		aP.className = aImg.className =  'hide';
+    		aInput.className = aSpan[0].className = aSpan[1].className = '';
+    		aInput.style.border = "1px solid #a59c21" ;
+    		aInput.style.width = "140px" ;
+    	}
+
+    	aSpan[0].onclick = function(){
+    		aInput.className = aSpan[0].className = aSpan[1].className = 'hide';
+    		aP.className = aImg.className =  '';
+    		aInput.style.border = "none" ;
+    		aInput.style.width = "100px" ;
+    		aP.innerHTML = aInput.value;
+    	}
+
+    	aSpan[1].onclick = function(){
+    		aP.className = aImg.className = '';
+            aInput.className = aSpan[0].className = aSpan[1].className = 'hide';
+            aInput.style.border = "none" ;
+            aInput.style.width = "100px" ;
+    	}
+    	li.onmouseover = function(){
+    		this.style.background = '#6fd12a';
+    		aImg.src = 'img/5.3_bg3.png';
+    	}
+    	li.onmouseout = function(){
+    		this.style.background = '#fff';
+    		aImg.src = 'img/5.3_bg1.png';
+    	}
+    }
+
+
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div><span>分类名称</span></div>
+		<ul id="list">
+			<li><p>信管创业基地</p><input type="text" / class="hide"><img src="img/5.3_bg1.png"><span>保存</span><span>取消</span></li>
+			<li><p>信管创业基地</p><input type="text" / class="hide"><img src="img/5.3_bg1.png"><span>保存</span><span>取消</span></li>
+			<li><p>信管创业基地</p><input type="text" / class="hide"><img src="img/5.3_bg1.png"><span>保存</span><span>取消</span></li>
+			<li><p>信管创业基地</p><input type="text" / class="hide"><img src="img/5.3_bg1.png"><span>保存</span><span>取消</span></li>
+
+		</ul>
+	</div>	
+</body>
+</html>

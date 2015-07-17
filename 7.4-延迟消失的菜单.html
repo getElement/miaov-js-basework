@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>延迟消失的菜单</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<style type="text/css">
+#wrap{height:92px;width:543px;margin:50px auto;position: relative;}
+#nav{width:520px;height:36px;background:url(img/7.4_navbg.png) no-repeat; font-size: 14px;margin-top: 10px;margin-left: 10px;line-height: 36px;color:#fff;}
+#nav a{border-radius:5px;display: block;height:26px;padding:0 10px;margin:0 10px;text-align: center;margin-top: 5px;line-height: 26px;color:#fff;}
+#nav a:hover{background:#638cad;}
+#nav li{background:url(img/7.4_navmid.png) no-repeat right;float:left;height:36px;}
+#nav span{margin-left:80px;}
+#list1,#list2,#list3,#list4{height:38px;font-size: 12px;line-height: 38px;color:#215a9c;position:absolute;top:46px;}
+#list1{background:url(img/7.4_bottom1.png) no-repeat;width:282px;left: 10px;display: none;}
+#list1 li{background:url(img/7.4_bottommid.png) no-repeat right;float: left;margin-left:16px;padding-right: 10px;}
+#list1 ul{height:36px;width:280px;}
+#list2{background:url(img/7.4_bottom2.png) no-repeat;width:292px;left:60px;display: none;}
+#list2 ul{height:36px;width:292px;}
+#list2 li{background:url(img/7.4_bottommid.png) no-repeat right;float: left;margin-left:10px;padding-right: 10px;}
+#list3{background:url(img/7.4_bottom3.png) no-repeat;width:262px;left:60px;display: none;}
+#list3 ul{height:36px;width:262px;}
+#list3 li{background:url(img/7.4_bottommid.png) no-repeat right;float: left;margin-left:10px;padding-right: 10px;}
+#list4{background:url(img/7.4_bottom4.png) no-repeat;width:342px;left:130px;display: none;}
+#list4 ul{height:36px;width:342px;}
+#list4 li{background:url(img/7.4_bottommid.png) no-repeat right;float: left;margin-left:25px;padding-right: 15px;}
+</style>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript">
+/*
+	1.点击菜单显示下面的二级菜单，隔一段时间消失
+	2.用定时器控制消失和显示
+*/
+
+$(function(){
+	var oWrap = $('wrap');
+	var oNav = $('nav');
+	var oLi = oNav.getElementsByTagName('li');
+	var oDiv = oWrap.getElementsByTagName('div');
+
+	for(var i=0;i<oLi.length;i++){
+		var timer = null;
+		var oA = oLi[i].getElementsByTagName('a')[0];
+		oA.index = i;
+
+		//鼠标在nav区时
+
+		oA.onmouseover = function(){
+			for(var i=0;i<oLi.length;i++){
+				oDiv[i].style.display = 'none';
+			}
+			oDiv[this.index].style.display = 'block';
+		}
+		oA.onmouseout = function(){
+			var This = this;
+			clearInterval(timer);
+			timer = setInterval(function(){
+				oDiv[This.index].style.display = 'none';
+			},1000);
+		}
+		clearInterval(timer);
+	}
+
+
+
+});
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="nav">
+			<li><a>首页</a></li>
+			<li><a>关于我们</a></li>
+			<li><a>作品</a></li>
+			<li><a>博客</a></li>
+			<span>>>更多</span>
+		</ul>
+		<div id="list1">
+			<ul>
+				<li><a>最近更新</a></li>
+				<li><a>活动</a></li>
+				<li><a>报名试听</a></li>
+				<li><a>学员反馈</a></li>
+			</ul>
+		</div>
+		<div id="list2">
+			<ul>
+				<li><a>妙味讲师</a></li>
+				<li><a>培训方式</a></li>
+				<li><a>培训理念</a></li>
+				<li><a>联系我们</a></li>
+			</ul>
+		</div>
+		<div id="list3">
+			<ul>
+				<li><a>班固</a></li>
+				<li><a>MATRIX</a></li>
+				<li><a>留学e网</a></li>
+				<li><a>ECMall</a></li>
+			</ul>
+		</div>
+		<div id="list4">
+			<ul>
+				<li><a>js教程</a></li>
+				<li><a>弹出层效果</a><li>
+				<li><a>3D</a></li>
+				<li><a>学员反馈</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

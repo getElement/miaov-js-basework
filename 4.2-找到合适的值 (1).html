@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>找到合适的值</title>
+
+<script>
+window.onload = function(){
+/*
+	1、找到arr里所有的数字：-98765, 34, -2, 0, 5
+	2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5 
+	3、把转成数字以后，最大值判断出来：300
+	4、把 NaN 所在的位置找出来：1 14 17  19
+
+	//分析：1、找到所有数字可以使用for循环遍历再用number判断
+			2、找到数字和字符串然后用isNaN判断
+			3、转换成数字后，最大值使用排序判断出来
+			4、给数组加上索引，判断NaN并返回索引值
+
+*/	
+var arr = [ '100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [], true, '200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90 ];
+
+var num = 0;
+var orr = [];
+var prr = [];
+
+for(var i=0;i<arr.length;i++){
+	if(typeof(arr[i]) === 'number' && !isNaN(arr[i])){
+		//document.writeln(arr[i]);
+	};
+	if(isNaN(arr[i])){
+		prr.push(i);
+	}
+	if(typeof(arr[i]) === 'number' && !isNaN(arr[i]) || typeof(arr[i]) === 'string'){
+		document.writeln(arr[i]);
+		orr.push(parseFloat(arr[i])); 
+	};
+};
+
+	for(var i=0;i<orr.length;i++){
+		if(orr[i+1]>orr[i]){
+			num = orr[i+1];
+		}
+	}
+//alert(num);
+//console.log(prr);
+}
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

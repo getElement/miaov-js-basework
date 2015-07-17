@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击加分效果</title>
+<link rel="stylesheet" type="text/css" href="base.css">
+<style type="text/css">
+#btn1{width:100%;text-align: center;}
+#btn1 input{margin:30px 0 30px 0;}
+#main{width:540px;height:300px;border:1px solid gray;margin:0 auto;}
+ul{width:500px;height:50px;border:1px solid gray;margin-top: 200px;margin-left: 20px;opacity: 1;position: relative;}
+ul li{width:50px; text-align: center;line-height: 50px;position: absolute;}
+p{background: blue;height:50px;opacity:0;width: 0;}
+</style>
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+/*8.8-点击加分效果
+思路:
+	1、鼠标点击按钮的时候li里面的+1依次向上移动并向上淡出
+	2、此时ul的透明度由0到1再到0
+	3、当最后一个li淡出的时候恢复。
+	4、封装一个淡入并淡出的函数
+分析：
+	1、当鼠标点击按钮的时候li里面的+1依次
+*/
+
+$(function(){
+var oBtn = $('#btn');
+var oScore = $('#score');
+var oLi = $('li');
+var oP = $('p');
+var flag = true;
+var onOff = false;
+var num = 0;
+
+for(var i=0;i<oLi.length;i++){
+	$('li').eq(i).css('left',i*50);
+	$('li').eq(i).css('top',0);
+}
+
+oBtn.click(function(){
+	if( onOff ){return;} 
+	onOff = false;
+	var iNow = num1 = num2 = 0;
+	var timer = setInterval(function(){
+		 oLi.eq(iNow).animate({ top: -300, opacity: 'hide' }, 1000);
+		iNow++;
+		if(iNow == oLi.length){
+			clearInterval(timer);
+		};
+	},80);
+
+	oP.eq(0).animate({ width: 500}, 500);
+	oP.eq(0).animate({ opacity: 1}, 500,function(){
+		oP.eq(0).animate({ opacity: 0}, 500);
+		oP.eq(0).animate({ width: 0}, 500);
+	});
+	
+
+});
+
+})
+</script>
+</head>
+<body>
+	<div id="btn1"><input type="button" id="btn" value="点击加分" /></div>
+	<div id="main">
+		<ul id="score">
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<li>+1</li>
+			<p></p>
+		</ul>
+	</div>
+</body>
+</html>

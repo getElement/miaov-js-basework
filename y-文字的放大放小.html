@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字的放大放小</title>
+<style type="text/css">
+.red{width:300px; background:red;padding:20px;color:yellow;
+	border:10px solid #ccc;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oBtn1 = document.getElementById('btn1');
+	var oBtn2 = document.getElementById('btn2');
+	var oBtn3 = document.getElementById('btn3');
+	var oText = document.getElementById('text1');
+	var oBtn5 = document.getElementById('btn5');
+	var oP = document.getElementById('p1');
+
+	var num = 15;
+
+	oBtn1.onclick = function(){
+		if(num>12){
+		num--;
+		oP.style.fontSize = num + 'px';
+		};
+	};
+	oBtn2.onclick = function(){
+		if(num<22){
+		num++;
+		oP.style.fontSize = num + 'px';
+		};
+	};
+	oBtn3.onclick = function(){
+		oP.className = 'red';
+	}
+
+	oBtn5.onclick = function(){
+		if(oText.value == ""){
+			alert('请输入验证口令')
+		}else if(oText.value == "CSS"){
+			alert('您输入的是CSS,恭喜，通过')
+		}else{
+			alert('')
+		}
+	};
+
+}
+</script>
+</head>
+<body>
+	<input id="btn1" type="button" value="-" />
+	<input id="btn2" type="button" value="+" />
+	<input id="btn3" type="button" value="红" />
+	<p id="p1">由陈国富监制,肖洋导演的天才青春喜剧《少年班》,于昨日(6日)在清华大学举办发布会,任性标榜主题“不靠脸!”,并发布了电影首批人物海报。肖洋的两位好友韩寒和叫兽易小星惊喜现身,与现场同学们大谈学生时期恋爱史。电影主演周冬雨与夏天作为片中两种“女神”的代表也压轴出现。由于三位导演金句不断,现场几百名学生多次爆笑鼓掌,气氛热烈燃爆初夏校园。</p>
+	验证口令
+	<input id="text1" type="text" />
+	<input id="btn5" type="button" value="验证" />
+</body>
+</html>

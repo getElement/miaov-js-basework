@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>往下掉div</title>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var str = '';
+	var len = 20;
+	var aDiv = document.getElementsByTagName('div');
+	var timer = null;
+	var num = 0;
+	var onoff = true;
+
+	for(var i=0;i<len;i++){
+		str += '<div style="width:50px; height:50px; background: red; position: absolute; top:0px; left:'+i*60+'px;"></div>';
+	}
+	document.body.innerHTML = str;
+
+		document.onclick = function(){
+			if(onoff){
+				clearInterval(timer);
+				timer = setInterval(function(){
+					doMove(aDiv[num],'top',23,500);
+					num++;
+					if(num == len){
+						clearInterval(timer);
+						num =0;
+						onoff = false;
+					}
+				},100);
+			}else if(onoff == false){
+				clearInterval(timer);
+				timer = setInterval(function(){
+					doMove(aDiv[num],'top',23,10);
+					num++;
+					if(num == len){
+						clearInterval(timer);
+						num = 0;
+						onoff = true;
+					}
+				},100);
+			};
+		}
+	
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

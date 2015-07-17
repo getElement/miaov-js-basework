@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动生成V字</title>
+<style type="text/css">
+
+div{
+	width:50px;
+	height:50px;
+	background:red;
+	position:absolute;
+	left:0;
+	top:0;
+
+}
+#list{
+	display: block;
+	margin-top: 30px;
+	position: absolute;
+}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+	var oDiv = document.getElementsByTagName('div');
+	var oBtn = document.getElementById('btn');
+	var oList = document.getElementById('list');
+	var o = 3;
+	var k=o;
+	var num = 0;
+	oBtn.onclick = function(){
+		if(num=0){
+			for(var i=0;i<o;i++){	
+				oList.innerHTML += '<div>'+i+'</div>';
+				oDiv[i].style.left = 10+i*60 +'px';	
+				oDiv[i].style.top = 10+i*60 +'px';
+			};
+			for(var j=0;j<o;j++){	
+				k--;
+				oList.innerHTML += '<div>'+j+'</div>';
+				oDiv[j+o].style.left = 10+(j+o)*60 +'px';	
+				oDiv[j+o].style.top = 10+(k)*60 +'px';
+			};				
+		}else if(num=1){
+			var k=o;
+			for(var i=0;i<o;i++){	
+				oList.innerHTML += '<div>'+i+'</div>';
+				oDiv[i].style.left = 10+i*60 +'px';	
+				oDiv[i].style.top = 10+i*60 +'px';
+			};
+			for(var j=0;j<o;j++){	
+				k--;
+				oList.innerHTML += '<div>'+j+'</div>';
+				oDiv[j+o].style.left = 10+(k)*60 +'px';	
+				oDiv[j+o].style.top = 10+(j+o)*60 +'px';
+			};
+		}else if(num=3){
+			var k=o;
+			for(var i=0;i<o;i++){
+				k--;
+				oList.innerHTML += '<div>'+i+'</div>';
+				oDiv[i].style.left = 10+k*60 +'px';	
+				oDiv[i].style.top = 10+i*60 +'px';
+			};
+			for(var j=0;j<o;j++){		
+				oList.innerHTML += '<div>'+j+'</div>';
+				oDiv[j+o].style.left = 10+(j+o)*60 +'px';	
+				oDiv[j+o].style.top = 10+(j)*60 +'px';
+			};	
+		};
+	num++;
+	};
+	
+}
+</script>
+</head>
+<body>
+	<input id="btn" type="button" value="自动生成V字"/>
+	<li id="list"></li>
+</body>
+</html>

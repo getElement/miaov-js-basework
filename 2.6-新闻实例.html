@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script type="text/javascript">
+window.onload = function(){
+	var oBtn = document.getElementById('btn1');
+	var oUl = document.getElementById('list');
+	var arr = [
+	'山西省委附近多次爆炸 官方称尚不确定是恐怖袭击',
+	'甘肃张掖明令禁止转基因 书记:无力辨别只能禁止',
+	'多地制定雾霾预案限行限排被批治标不治本',
+	'韩媒抱怨中国雾霾侵袭韩国 称其为"黑色灾难" ',
+	'伊朗革命卫队高官在叙利亚当"志愿者"被杀(图)'
+	];
+
+	/*
+
+	1.从按钮下手
+		oBtn.disabled = true;
+		oBtn.display = 'none';
+	2.先清空再生成
+	3.判断
+		var onOff =true;
+
+	*/
+
+	var onOff =true;
+
+	oBtn.onclick = function(){
+		if(onOff){
+			for(var i=0;i<arr.length;i++){
+				oUl.innerHTML +='<li>'+arr[i]+'</li>';
+			};
+			onOff = false;
+		};
+	};
+
+
+
+
+}
+</script>	
+</head>
+<body>
+	<input id="btn1" type = "buttton" value="自动生成5条新闻" />
+	<ul id="list"></ul>
+</body>
+</html>

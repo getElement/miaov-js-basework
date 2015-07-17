@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>点击滑动图片</title>
+<link rel="stylesheet" type="text/css" href="css/base.css" />
+<script type="text/javascript" src="js/xg.js"></script>
+<style type="text/css">
+body{width: 100%;height:100%;}
+#wrap{margin:40px 400px;position:relative;height:400px;width:500px;background: #F9F9F9;}
+#prev{position: absolute;left:0;top:120px;z-index:10;}
+#next{position: absolute;right:0;top:120px;z-index:10;}
+#imgs img{position: absolute;left:100px;top:0;}
+#text{position:absolute;left:550px;top:200px; height:100px;width:200px;line-height: 50px;border:2px solid gray;background:#fff;z-index:12;display: none;}
+#text p{text-align: center;}
+#text input{margin-left: 80px;}
+#bg{background:#000;opacity:0.4;width:100%;height:100%;border: 1px solid red;position: absolute;top:0;left:0;z-index: 2;display:none;}
+</style>
+<script type="text/javascript">
+/*
+1.点击图片的left值向右递加，透明度递减
+2.点击图片的right值向左递减，透明度递减
+
+
+
+*/
+$(function(){
+	var oPrev = $('prev');
+	var oNext = $('next');
+	var oImgs = $('imgs');
+	var oText = $('text');
+	var oInput =  oText.getElementsByTagName('input')[0];
+	var oBg = $('bg');
+	var oImg = oImgs.getElementsByTagName('img');
+
+	var flag = 1;
+	var iNow = 0;
+
+	//将图片从上到下排列
+	for(var i=0;i<oImg.length;i++){
+		oImg[i].style.zIndex = oImg.length-i;
+	}
+
+	oPrev.onclick = function(){
+		flag = -1;
+		Move(flag*200);
+	};
+
+	oNext.onclick = function(){
+		flag = 1;
+		Move(flag*300);
+	}
+
+	function Move(flag){
+		if ( iNow < oImg.length ) {
+		doMove(oImg[iNow],'left',18,flag);
+		fadeOut(oImg[iNow]);
+			iNow++;
+		}
+		else {
+			oBg.style.display = oText.style.display = 'block';
+		}
+	}
+
+	oInput.onclick = function () {
+		oBg.style.display = oText.style.display = 'none';
+		for(var i=4;i>=0;i--){
+			doMove(oImg[i],'left',18,100);
+			fadeIn(oImg[i]);
+		}
+		iNow = 0;
+	};
+
+});
+
+
+
+
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<img id="prev" src="img2/prev.png">
+		<div id="imgs">
+			<img src="img/7.8_bg1.jpg" alt="" />
+			<img src="img/7.8_bg2.jpg" alt="" />
+			<img src="img/7.8_bg3.jpg" alt="" />
+			<img src="img/7.8_bg4.jpg" alt="" />
+			<img src="img/7.8_bg5.jpg" alt="" />
+		</div>
+		<img id="next" src="img2/next.png">
+	</div>
+	<div id="text">
+		<p>再来一次</p>
+		<input type="button" value="重来" />
+	</div>
+	<div id="bg"></div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>循环遍历对象属性</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+var str = '';
+var num = 0;
+for(var attr in window){
+	str += num + '、' +attr +':'+ document[attr] + '<br/>';
+	num ++;
+}
+document.body.innerHTML = str;
+</script>
+</html>

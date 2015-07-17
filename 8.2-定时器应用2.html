@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>定时器应用2</title>
+<style type="text/css">
+#div1{width:100px;height:100px;background:red;position: absolute; top:50px; left: 10px;}
+</style>
+</head>
+<body>
+	<input id="btn1" type="button" value="往后" />
+	<input id="btn2" type="button" value="往前" />
+	<input id="btn3" type="button" value="往下" />
+	<input id="btn4" type="button" value="往上" />
+	<div id="div1"></div>
+<script type="text/javascript">
+var oBtn1 = document.getElementById('btn1');
+var oBtn2 = document.getElementById('btn2');
+var oBtn3 = document.getElementById('btn3');
+var oBtn4 = document.getElementById('btn4');
+var oDiv = document.getElementById('div1');
+
+oBtn1.onclick = function(){
+	doMove(oDiv,'left',12,10);
+}
+
+oBtn2.onclick = function(){
+	doMove(oDiv,'left',12,800);
+}
+
+oBtn3.onclick = function(){
+	doMove(oDiv,'top',12,500);
+}
+
+oBtn4.onclick = function(){
+	doMove(oDiv,'top',12,40);
+}
+/*
+	oDiv 12 800 >;
+	oDiv -12 -10 <;
+
+	doMove(oDiv,12,800)
+
+*/
+function doMove(obj,attr,dir,target){
+	dir = parseInt(getStyle(obj,attr))<target ? dir : -dir;
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		var speed = parseInt(getStyle(obj,attr)) + dir;
+		if(speed > target && dir>0 || speed < target && dir<0){//往前跑
+			speed = target;
+		}
+		obj.style[attr] = speed + 'px';
+		if(speed == target){
+			clearInterval(obj.timer);
+		}
+	},30);
+}
+
+function getStyle(obj,attr){
+	return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+}
+</script>
+</body>
+</html>

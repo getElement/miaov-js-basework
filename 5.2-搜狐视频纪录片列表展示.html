@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜狐视频记录片列表展示</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+<style type="text/css">
+#wrap{width:268px;background:#dee7e7;margin:0 auto; padding:0 6px;font-family: "微软雅黑"}
+#top{width:268px;height:38px;color:#185273;}
+h2{display:block;font-size: 18px;margin-left:12px; width:148px;height:32px;float:left;border-bottom: 1px solid #94bdd6;padding-top: 5px;}
+#list{width:106px;height:24px;float:right;margin-top:12px;border:1px solid #94bdd6;}
+#list li{float:left;width:34px;height:24px;border-right:1px solid #94bdd6; cursor: pointer;}
+#list li:last-child{border-right: none;}
+.active{color: #000; font-weight: bold; background: #fff; border-bottom: 1px solid #fff !important; }
+#date,#week,#all{display: none;}
+#date li,#week li,#all li{width:256px;font-size: 12px;text-align: left;line-height: 28px;border-bottom:1px dashed #fff; position: relative;}
+#date a,#week a,#all a{display: block;margin-left: 37px;display:block;} 
+#date span,#week span,#all span{position:absolute;top:8px;left:14px;width:17px; height:13px;background:url(img/5.2_bg2.png) no-repeat;font-size: 10px;text-align: center;line-height: 14px;font-weight: bold;color:#fff;display:inline-block;z-index: 1;}
+#date div,#week div,#all div{height:225px;display: none;height: 82px; overflow: hidden;}
+.bg1{background: url(img/5.2_bg1.png) no-repeat;}
+.bg2{background: url(img/5.2_bg3.png) no-repeat;}
+.show {display: block !important; }
+</style>
+<script type="text/javascript">
+window.onload = function(){
+/*
+	1.划过变换border
+	2.划过显示div
+
+*/
+var oTop = document.getElementById('top');
+var oList = document.getElementById('list');
+var aList = oList.getElementsByTagName('li');
+var oContact = document.getElementById('contact');
+var oUl = oContact.getElementsByTagName('ul');
+for (var i=0; i<oUl.length; i++) {
+	hover(oUl[i]);
+}
+function fnTab(num){
+	for(var i=0; i<aList.length; i++) {
+		aList[i].className = '';
+		oUl[i].className = '';
+	}
+	aList[num].className = 'active';
+	oUl[num].className = 'show';
+}
+//切换标签
+for(var i=0;i<aList.length;i++){
+	aList[i].index = i;
+	aList[i].onclick = function(){
+		var num = this.index;
+		fnTab(num);
+	}
+}
+
+//划过显示
+function hover(ul){
+	var aLi = ul.getElementsByTagName('li');
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].onmouseover = function(){
+            this.getElementsByTagName('a')[0].style.display = 'none';
+            this.getElementsByTagName('div')[0].style.display = 'block';
+		}
+		aLi[i].onmouseout = function(){
+            this.getElementsByTagName('a')[0].style.display = 'block';
+            this.getElementsByTagName('div')[0].style.display = 'none';
+         }
+
+	}
+}
+
+
+}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="top">
+			<h2>观看排行榜</h2>
+			<ul id="list" class="clearfix">
+				<li id="list1" class="active">每日</li>
+				<li id="list2">每周</li>
+				<li id="list3">全部</li>
+			</ul>
+		</div>
+		<div id="contact"> 
+			<ul id="date" class="show">
+				<li>
+					<span>1</span>
+					<a href="#">探索传世国宝的海外旅程之一</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>2</span>
+					<a href="#">经典传奇，探索中国的历史事件</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li >
+					<span>3</span>
+					<a href="#">眼界，展示普通人的曲折命运</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>4</span>
+					<a href="#">档案：惊人事件后的离奇故事</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>5</span>
+					<a href="#">世纪之最：震惊中国的20个top</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>6</span>
+					<a href="#">身边的毛泽东：警卫员解释毛泽东</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>7</span>
+					<a href="#">新电影传奇：每一个电影后面不为人知</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>8</span>
+					<a href="#">探索传世国宝的海外旅程之一</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>9</span>
+					<a href="#">纪实记录:讲述民国时期的谍战</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>10</span>
+					<a href="#">动物世界：那些卖萌卖到死的宠物们</a>
+					<div class="bg2">>
+					</div>
+				</li>
+			</ul>
+			<ul id="week" >
+				<li>
+					<span>1</span>
+					<a href="#">每周传世国宝的海外旅程之一</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>2</span>
+					<a href="#">每周传奇，探索中国的历史事件</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li >
+					<span>3</span>
+					<a href="#">每周，展示普通人的曲折命运</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>4</span>
+					<a href="#">每周：惊人事件后的离奇故事</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>5</span>
+					<a href="#">每周之最：震惊中国的20个top</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>6</span>
+					<a href="#">每周的毛泽东：警卫员解释毛泽东</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>7</span>
+					<a href="#">每周影传奇：每一个电影后面不为人知</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>8</span>
+					<a href="#">每周传世国宝的海外旅程之一</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>9</span>
+					<a href="#">每周记录:讲述民国时期的谍战</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>10</span>
+					<a href="#">每周世界：那些卖萌卖到死的宠物们</a>
+					<div class="bg2">
+					</div>
+				</li>	
+			</ul>
+			<ul id="all">
+				<li>
+					<span>1</span>
+					<a href="#">传世国宝的海外旅程之一</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>2</span>
+					<a href="#">传奇，探索中国的历史事件</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li >
+					<span>3</span>
+					<a href="#">，展示普通人的曲折命运</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>4</span>
+					<a href="#">：惊人事件后的离奇故事</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>5</span>
+					<a href="#">之最：震惊中国的20个top</a>
+					<div class="bg1">
+					</div>
+				</li>
+				<li>
+					<span>6</span>
+					<a href="#">的毛泽东：警卫员解释毛泽东</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>7</span>
+					<a href="#">影传奇：每一个电影后面不为人知</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>8</span>
+					<a href="#">传世国宝的海外旅程之一</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>9</span>
+					<a href="#">记录:讲述民国时期的谍战</a>
+					<div class="bg2">
+					</div>
+				</li>
+				<li>
+					<span>10</span>
+					<a href="#">世界：那些卖萌卖到死的宠物们</a>
+					<div class="bg2">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

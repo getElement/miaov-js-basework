@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>反选</title>
+<script type="text/javascript">
+window.onload = function(){
+	var aInp = document.getElementsByTagName('input');
+
+	aInp[0].onclick = function(){
+		for(var i=1;i<aInp.length;i++){
+			aInp[i].checked = !aInp[i].checked;
+			/*if(aInp[i].checked){
+				aInp[i].checked = false;
+			}else{
+				aInp[i].checked = true;
+			}*/
+		}
+	}
+
+
+
+
+}
+</script>
+</head>
+<body>
+	<input type = "button" value="反选" />
+	<ul>
+		<li><input type="checkbox" checked /></li>
+		<li><input type="checkbox" /></li>
+		<li><input type="checkbox" /></li>
+		<li><input type="checkbox" /></li>
+	</ul>
+</body>
+</html>

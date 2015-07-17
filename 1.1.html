@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作业</title>
+</head>
+<style type="text/css">
+*{margin:0px;padding:0px;border:0px;}
+#wrap{}
+h2{display:block;float:left;margin-left: 30px;margin-top: 30px;}
+#box1{float:left;width:100px;height:30px;background:red;text-align: center;line-height: 30px;margin:30px 0 0 30px;cursor: pointer; }
+#box2{clear:both;width:150px;height:150px;margin-left:30px;margin-top: 30px;border:2px solid black;}
+#box3{position:absolute;top:0;left:0;width:100%; height:100%; display:none;background:#000; opacity:0.5;
+	}
+#box4{display:none;border:5px solid #9C949C;width:300px;height:140px;position: absolute;left:450px;top:300px;padding:40px;line-height: 40px; background:#fff;}
+.list{width:50px;height:30px;display: inline-block;background:#EFEFEF;text-align: center;border:1px solid #C0C0C0; cursor: pointer;}
+.list:hover{
+	background:#EF9400;
+}
+#bgs1{margin-left: 10px;background:#9CCE00;}
+#bgs2{background:#EFBD00;}
+#bgs3{background:#5A94EF;}
+#recover, #ok{width:60px; height:30px;margin-top:10px;background:#002952;text-align: center;line-height: 30px;float:left;color:#fff;}
+#recover{ margin-left:70px;cursor: pointer;}
+#ok{ margin-left:5px;cursor: pointer;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	xg.app.toShow();
+	xg.app.toChange();
+	xg.app.toCover();
+}
+var xg = {};	//命名空间
+
+xg.tools = {}; //底层库
+
+xg.tools.getByClass = function(oParent,sClass){
+	var aEle = oParent.getElementsByTagName('*');
+	var arr = [];
+	for(var i=0; i<aEle.length;i++)
+		if(aEle[i].className == sClass){
+			arr.push(aEle[i]);
+		}
+		return arr;
+}
+
+xg.ui = {};	//组件
+
+xg.app = {};	//应用
+
+xg.app.toShow = function(){
+	var oBox1 = document.getElementById('box1');
+	var oBox2 = document.getElementById('box2');
+	var oBox3 = document.getElementById('box3');
+	var oBox4 = document.getElementById('box4');
+
+	oBox1.onclick = function(){
+		oBox4.style.display = 'block';
+		oBox3.style.display = 'block';
+	};
+
+};
+
+xg.app.toChange = function(){
+	var oBox2 = document.getElementById('box2');
+	var oBgs1 = document.getElementById('bgs1');
+	var oBgs2 = document.getElementById('bgs2');
+	var oBgs3 = document.getElementById('bgs3');
+	var oWd1 = document.getElementById('wd1');
+	var oWd2 = document.getElementById('wd2');
+	var oWd3 = document.getElementById('wd3');
+	var oHd1 = document.getElementById('hd1');
+	var oHd2 = document.getElementById('hd2');
+	var oHd3 = document.getElementById('hd3');
+  
+	oBgs1.onclick = function(){
+		oBgs1.style.background = 'red';
+		oBox2.style.background = 'red';
+	};
+	oBgs2.onclick = function(){
+		oBgs2.style.background = 'yellow';
+		oBox2.style.background = 'yellow';
+	};
+	oBgs3.onclick = function(){
+		oBgs3.style.background = 'blue';
+		oBox2.style.background = 'blue';
+	};
+	oWd1.onclick = function(){
+		oBox2.style.width = '200px';
+	};
+	oWd2.onclick = function(){
+		oBox2.style.width = '300px';
+	};
+	oWd3.onclick = function(){
+		oBox2.style.width = '400px';
+	};
+	oHd1.onclick = function(){
+		oBox2.style.height = '200px';
+	};
+	oHd2.onclick = function(){
+		oBox2.style.height = '300px';
+	};
+	oHd3.onclick = function(){
+		oBox2.style.height = '400px';
+	};
+}
+
+xg.app.toCover = function(){
+	var oRecover = document.getElementById('recover');
+	var oOk = document.getElementById('ok');
+	var oBox3 = document.getElementById('box3');
+	var oBox4 = document.getElementById('box4');
+	var oBox2 = document.getElementById('box2');
+	oRecover.onclick = function(){
+		oBox2.style.height = '150px';
+		oBox2.style.width = '150px';
+		oBox2.style.background = '#fff';
+		oBox4.style.display = 'none';
+		oBox3.style.display = 'none';
+	};
+	oOk.onclick = function(){
+		oBox4.style.display = 'none';
+		oBox3.style.display = 'none';
+	};
+}
+</script>
+<body>
+	<div id="wrap">
+		<h2>请为下面的div设置样式</h2>
+		<div id="box1">点击设置</div>
+		<div id="box2"></div>
+	<div id="box3"></div>
+	<div id="box4">
+		请选择背景色:
+		<div id="bgs1" class="list">红</div>
+		<div id="bgs2" class="list">黄</div>
+		<div id="bgs3" class="list">蓝</div>
+		</br>
+		请选择宽度(px):
+		<div id="wd1" class="list">200</div>
+		<div id="wd2" class="list">300</div>
+		<div id="wd3" class="list">400</div>
+		</br>
+		请选择高度(px):
+		<div id="hd1" class="list">200</div>
+		<div id="hd2" class="list">300</div>
+		<div id="hd3" class="list">400</div>
+		</br>
+		<div id="recover">恢复</div>
+		<div id="ok">确定</div>
+	</div>
+	</div>
+</body>
+</html>

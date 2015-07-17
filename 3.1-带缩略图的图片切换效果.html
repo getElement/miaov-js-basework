@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>带缩略图的轮播图</title>
+<style type="text/css">
+*{padding:0; margin:0;}
+ul,li{list-style:none;}
+a{text-decoration:none;}
+a:hover{text-decoration: underline;}
+
+#pic{position:relative;width:350px;height:250px; margin:0 auto;}
+#pic #prev{opacity: 0.5; text-aLign:center; font-size: 25px; border-radius: 78.5px;position:absolute; top:110px; left:0;width:30px; height:30px; background:yellow;}
+#pic #next{opacity: 0.5; text-aLign:center; font-size: 25px; border-radius: 78.5px;position:absolute; top:110px; right:0;width:30px; height:30px; background:yellow;}
+#pic ul{position:absolute; bottom:-40px;left:125px;}
+#pic li{margin-right:20px;float:left;position:relative;border-radius:78.5px;width:10px;height:10px;background:gray;}
+#pic .active{background:green;}
+#pic p{position:absolute; top:0; left:0; width:350px; text-aLign:center; color:white;}
+#pic li div{position:absolute;top:-100px;left:-50px;opacity:0.9;background:gray;width:120px;height:85px;display:none;}
+#pic div img{position:absolute;top:5px;left:7.5px;width:105px;height:75px;}
+#pic img{width:350px;height:250px;}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	/*
+	分析：
+	1.中间图片切换用点击事件切换路径实现
+	2.缩略图用鼠标划过显示当前li下的div
+	3.图片路径放在一个数组里，直接调用
+	4.通过自定义属性index给li动态添加索引
+	5.active样式通过每次清除className动态添加效果
+	6.通num来控制当前页码
+	7.将初始化代码封装
+	*/
+	var oDiv = document.getElementById('pic');
+	var oPrev = document.getElementById('prev');
+	var oNext = document.getElementById('next');
+	var oP = oDiv.getElementsByTagName('p')[0];
+	var oUl = oDiv.getElementsByTagName('ul')[0];//必须定位到第一个ul，否则则是整个页面所有的ul集合
+	var oImg = oDiv.getElementsByTagName('img')[0];
+	var aImg = oUl.getElementsByTagName('img');
+ 	var aLi = oUl.getElementsByTagName('li');
+
+	var arrUrl = ['img2/1.png','img2/2.png','img2/3.png','img2/4.png'];
+	var num = 0;
+	var len = arrUrl.length;
+
+	//动态添加li
+	for(var i=0;i<len;i++){
+	oUl.innerHTML += '<li><div><img src=""/></div></li>'
+	}
+
+	//动态添加active
+	function addActive(){
+		for( var i=0; i<aLi.length; i++ ){
+			aLi[i].className = '';
+		}
+		aLi[num].className = 'active';
+	}
+
+	//初始化函数
+	function fnTag(){
+		oImg.src = arrUrl[num];
+		oP.innerHTML = 1+num+' / '+len;
+		addActive();
+	}
+	fnTag();
+
+	//给li添加索引,动态添加active，并实现图片切换
+	for(var i=0;i<len;i++){
+		aLi[i].index = i;
+		aLi[i].onclick = function(){
+			for(var i=0;i<len;i++){
+				aLi[i].className = '';
+			}
+			oImg.src = arrUrl[this.index];
+			this.className = 'active';
+			oP.innerHTML = 1+this.index+'/'+len;
+		};
+	};
+
+	//添加上一张点击切换事件
+	oNext.onclick = function(){
+		num++;
+		if(num === len){
+			num = 0;
+		};
+		fnTag();
+	};
+
+	//添加下一张点击切换事件
+	oPrev.onclick = function(){
+		num--
+		if(num === -1){
+			num = len-1;
+		};
+		fnTag();
+	};
+  
+  	//添加鼠标划过划出缩略图的效果
+  	for(var i=0;i<len;i++){
+  		aLi[i].onmouseover = function(){
+  			var aDiv = this.getElementsByTagName('div');
+  			aDiv[0].style.display = 'block';
+  			aImg[this.index].src = arrUrl[this.index];
+  		};
+  		aLi[i].onmouseout = function(){
+  			var aDiv = this.getElementsByTagName('div');
+  			aDiv[0].style.display = 'none';
+  		};
+  	}
+ }
+</script>
+</head>
+<body>
+	<div id="pic">
+	  <p>图片数量正在加载...</p>
+	  <a id="prev" href="javascript:;"> < </a>
+	  <a id="next" href="javascript:;"> > </a>
+	  <img src=""/>
+	  <ul>
+	  </ul>
+	  <div class="ha"></div>
+	</div>
+</body>
+</html>	

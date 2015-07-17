@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>替换背景</title>
+</head>
+<body>
+	<input type="button" value="换背景吧" /> 
+	<input type="button" value="停" /> 
+
+<script type="text/javascript">
+var aBtn = document.getElementsByTagName('input');
+var arr = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg'];
+var num = 0;
+var oBody = document.body;
+var timer = null;
+
+aBtn[0].onclick =function(){
+	clearInterval(timer);	//清楚null,未定义都可以清楚
+	timer = setInterval(function(){
+		oBody.style.background = 'url('+arr[num]+')';
+		num++;
+		num %= arr.length;
+	},1000);
+};
+aBtn[1].onclick = function(){
+	clearInterval(timer);
+}
+
+
+
+</script>
+</body>
+</html>

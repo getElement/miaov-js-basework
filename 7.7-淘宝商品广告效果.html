@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>淘宝商品广告效果</title>
+<style>
+	img {border: 0; float: left; margin: 0 5px; } 
+	li {list-style: none; border: 1px solid #FFADAD; width: 40px; padding: 5px; text-align: center; font-size: 12px; } 
+	a {text-decoration: none; display: block; color: #000; } 
+	#wrap {border: 1px solid #FF6300; padding: 5px; overflow: hidden; width: 400px; margin: 50px auto; }
+	 #left {float: left; } 
+	 #right {float: left; right: 0; top: 0; } 
+</style>
+<script>
+	window.onload = function(){
+		var oImg = document.getElementsByTagName('img')[0],
+			aLi = document.getElementsByTagName('li'),
+			timer = null,
+			img = ['img/7.7_bg1.png', 'img/7.7_bg2.png','img/7.7_bg3.png','img/7.7_bg4.png','img/7.7_bg5.png','img/7.7_bg6.png','img/7.7_bg7.png','img/7.7_bg8.png','img/7.7_bg9.png','img/7.7_bg10.png','img/7.7_bg11.png','img/7.7_bg12.png','img/7.7_bg13.png','img/7.7_bg14.png'],
+			num = 0,
+			flag = 0;
+
+		//清除页面上所有class和样式
+		function clearAll(){
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].style.background = '#fff';
+				aLi[i].getElementsByTagName('a')[0].style.color = '#000';
+			}
+		}
+
+		//鼠标划过的时候显示背景鼠标划出的时候继续执行定时器
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].index = i;
+			aLi[i].onmouseout = function(){
+				this.style.background = '#FFF';
+				this.getElementsByTagName('a')[0].style.color = '#000';
+				timer = setInterval(autoplay, 1000);
+			}
+			aLi[i].onmouseover = function(){
+				clearInterval(timer);
+				clearAll();
+				this.style.background = '#FF4A6B';
+				this.getElementsByTagName('a')[0].style.color = '#fff';
+				oImg.src = img[this.index];
+			}
+		}
+
+		//轮播图片
+		function autoplay(){
+			clearAll();
+
+			aLi[num].style.background = '#FF4A6B';
+			aLi[num].getElementsByTagName('a')[0].style.color = '#fff';
+			oImg.src = img[num];
+
+			if(num<aLi.length/2){
+				num++;
+				if (num == aLi.length/2) {	//	如果走到左边底部，则num指向最后一个li
+					num = aLi.length - 1;
+				}
+			} else {
+				num--;
+				if (num == aLi.length/2 - 1) { //如果走到右边最上面 ，num指向第一个li
+					num = 0;
+				}
+			}
+		}
+
+		timer = setInterval(autoplay, 1000);
+		
+	}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="left">
+			<li><a href="#">连衣裙</a></li>
+			<li><a href="#">雪纺</a></li>
+			<li><a href="#">T恤</a></li>
+			<li><a href="#">铅笔裤</a></li>
+			<li><a href="#">婚纱</a></li>
+			<li><a href="#">外套</a></li>
+			<li><a href="#">连体裤</a></li>
+		</ul>
+		<img src="8-img/1.png" />
+		<ul id="right">
+			<li><a href="#">包包</a></li>
+			<li><a href="#">凉鞋</a></li>
+			<li><a href="#">单鞋</a></li>
+			<li><a href="#">太阳镜</a></li>
+			<li><a href="#">丝袜</a></li>
+			<li><a href="#">帆布鞋</a></li>
+			<li><a href="#">情侣装</a></li>
+		</ul>
+	</div>
+</body>
+</html>

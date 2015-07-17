@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片自动切换</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<style type="text/css">
+img {
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+#showbox {
+    border: 5px solid #c0c0c0;
+    font-size: 0;
+    height: 399px;
+    margin: 50px auto;
+    overflow: hidden;
+    position: relative;
+    width: 514px;
+}
+#wrap {
+    left: 0;
+    position: absolute;
+    width: 3600px;
+}
+h1 {
+    font-size: 24px;
+    line-height: 36px;
+    margin: 0;
+    padding: 5px;
+}
+p {
+    line-height: 20px;
+    margin: 0;
+    padding: 5px 5px 10px;
+}
+#info {
+    font-size: 14px;
+    left: 0;
+    position: absolute;
+    top: 399px;
+    width: 514px;
+}
+#info div {
+    background: #000 none repeat scroll 0 0;
+    color: #fff;
+    left: 0;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    width: 514px;
+}
+img{height:399px;width:514px;}
+</style>
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/xg.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	var oWrap = document.getElementById('wrap'),
+		aImg = oWrap.getElementsByTagName('img'),
+		num = 0,
+		timer = null,
+		oInfo = document.getElementById('info'),
+		aDiv = oInfo.getElementsByTagName('div');
+
+	fnTab();
+
+	function fnTab() {
+		setTimeout(function() {
+
+			//下面的透明层首先移动，向上移动
+			doMove(aDiv[num], 'top', 20, 0, function() {
+				num++;
+				if (num == aDiv.length) {
+					num = 1;	//如果切换完毕，num回到
+					oWrap.style.left = 0;	//图片移动到左对齐
+				}
+				//图片从左向左移动
+				doMove(oWrap, 'left', 20, -514 * num, function() {
+					doMove(aDiv[num], 'top', 20, -97);// 同时透明层也向上移动
+					fnTab();	//函数循环执行fnTab
+				})
+			})
+		}, 2000)
+	}			
+
+})	
+</script>
+</head>	
+<body>
+	<div id="showbox">
+		<div id="wrap">
+			<img src="img/8.9_bg1.gif" alt="">
+			<img src="img/8.9_bg2.gif" alt="">
+			<img src="img/8.9_bg3.gif" alt="">
+			<img src="img/8.9_bg4.gif" alt="">
+			<img src="img/8.9_bg5.gif" alt="">
+			<img src="img/8.9_bg1.gif" alt="">
+		</div>
+		<div id="info">
+			<div>
+				<h1>离婚律师：第1集</h1>
+				<p>1：擅长离婚诉讼、一向在法庭上慷慨激昂口若悬河的著名律师池海东（吴秀波 饰）算阴沟里翻船了，老婆公然给他戴了绿帽子，更倒霉的是作为受害者的他竟然输掉了和老婆的离婚官司。</p>
+			</div>
+			<div>
+				<h1>离婚律师：第2集</h1>
+				<p>2：擅长离婚诉讼、一向在法庭上慷慨激昂口若悬河的著名律师池海东（吴秀波 饰）算阴沟里翻船了，老婆公然给他戴了绿帽子，更倒霉的是作为受害者的他竟然输掉了和老婆的离婚官司。</p>
+			</div>
+			<div>
+				<h1>离婚律师：第3集</h1>
+				<p>3：擅长离婚诉讼、一向在法庭上慷慨激昂口若悬河的著名律师池海东（吴秀波 饰）算阴沟里翻船了，老婆公然给他戴了绿帽子，更倒霉的是作为受害者的他竟然输掉了和老婆的离婚官司。</p>
+			</div>
+			<div>
+				<h1>离婚律师：第4集</h1>
+				<p>4：擅长离婚诉讼、一向在法庭上慷慨激昂口若悬河的著名律师池海东（吴秀波 饰）算阴沟里翻船了，老婆公然给他戴了绿帽子，更倒霉的是作为受害者的他竟然输掉了和老婆的离婚官司。</p>
+			</div>
+			<div>
+				<h1>离婚律师：第5集</h1>
+				<p>5：擅长离婚诉讼、一向在法庭上慷慨激昂口若悬河的著名律师池海东（吴秀波 饰）算阴沟里翻船了，老婆公然给他戴了绿帽子，更倒霉的是作为受害者的他竟然输掉了和老婆的离婚官司。</p>
+			</div>
+			<div>
+				<h1>离婚律师：第1集</h1>
+				<p>1：擅长离婚诉讼、一向在法庭上慷慨激昂口若悬河的著名律师池海东（吴秀波 饰）算阴沟里翻船了，老婆公然给他戴了绿帽子，更倒霉的是作为受害者的他竟然输掉了和老婆的离婚官司。</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
