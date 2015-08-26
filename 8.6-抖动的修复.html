@@ -18,7 +18,7 @@ img { width:100px; height:100px; position:absolute; top:200px; }
 分析：
 	1、抖函数利用一组正负交错的数组来实现抖动
 	2、用if( obj.shaked ) { return; }实现同时开几个定时器，如果shaked为真，不执行下面的代码
-	3、抖动的修复是因为初始位置是在抖动函数里获取，这样就不会出现抖动错位
+	3、抖动的修复是因为抖动的时候做了判断，这样就不会出现抖动错位
 
 */
 function getStyle ( obj, attr ) { return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle( obj )[attr]; }
